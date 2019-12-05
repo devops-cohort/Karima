@@ -1,0 +1,29 @@
+% extends "layout.html" %}
+
+
+{% block body_content %}
+        <p> Colours? We have many! Take your pick and create your palette as you please! </p>
+        <div class="form">
+                <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        {{ form.palette_name.label }}
+                        {{ form.palette_name }}
+                        <br>
+                        {{ form.colour1.label }}
+                        {{ form.colour1 }}
+                        <br>
+                        {{ form.colour2.label }}
+                        {{ form.colour2 }}
+                        <br>
+                        {{ form.colour3.label }}
+                        {{ form.colour3 }}
+                        <br>
+                        {{ form.submit }}
+                </form>
+        </div>
+
+
+###how to random?
+
+{% endblock body_content %}
+
