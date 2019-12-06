@@ -1,0 +1,69 @@
+<html>
+{% extends "layout.html" %}
+{% block body_content %}
+    <h1>{{ Palette.palette_name }} - update </h1>
+    <p><b> Go ahead and switch it up!</b> </p>
+    <div class="form">
+        <form method="POST" action=" ">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.palette_name.label }}
+                {% if form.palette_name.errors %}
+                    {{ form.palette_name }}
+                    <div class="error">
+                        {% for error in form.palette_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.palette_name }}
+                {% endif %}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.colour1.label }}
+                {% if form.colour1.errors %}
+                    {{ form.colour1 }}
+                    <div class="error">
+                        {% for error in form.colour1.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.colour1 }}
+                {% endif %}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.colour2.label }}
+                {% if form.colour2.errors %}
+                    {{ form.colour2 }}
+                    <div class="error">
+                        {% for error in form.colour2.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.colour2 }}
+                {% endif %}
+            </div>
+            <br>
+	     <div class="form-group">
+                {{ form.colour3.label }}
+                {% if form.colour3.errors %}
+                    {{ form.colour3 }}
+                    <div class="error">
+                        {% for error in form.colour3.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.colour3 }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.submit }}
+            </div>
+        </form>
+{% endblock body_content %}
+</html>

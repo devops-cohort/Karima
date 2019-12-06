@@ -34,10 +34,9 @@ class Palettes(db.Model):
 
 class Sortment(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    c_id = db.Column(db.Integer,db.ForeignKey('colours.id') nullable=False)
-    p_id = db.Column(db.Integer,db.ForeignKey('palettes.id') nullable=False)
+    c_id = db.Column(db.Integer,db.ForeignKey('colours.id'), nullable=False)
+    p_id = db.Column(db.Integer,db.ForeignKey('palettes.id'), nullable=False)
     
-
     def __repr__(self):
         return ''.join([
             'Sortment ID: ', str(self.id), '\r\n',

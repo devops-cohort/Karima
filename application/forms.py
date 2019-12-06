@@ -3,13 +3,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError
 
-from application.models import Colours
-    ###import all tables or?
+from application.models import Colours, Palettes, Sortment
 
 
 class PaletteForm(FlaskForm):
 
-    name = StringField('Palette Name',
+    palette_name = StringField('Palette Name',
         validators=[
             DataRequired(),
             Length(min=1, max=100)
@@ -40,8 +39,44 @@ class PaletteForm(FlaskForm):
     submit = SubmitField('Make my palette!')
 
 
-class RandomForm(Flaskform):
+class UpdatePaletteForm(FlaskForm):
 
-    ###how to random???
+    palette_name = StringField('Palette Name',
+        validators=[
+            DataRequired(),
+            Length(min=1, max=100)
+        ]
+    )
 
-    submit = SubmitField('Surprise me!')
+    colour1 = StringField('Colour 1',
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20)
+        ]
+    )
+
+    colour2 = StringField('Colour 2',
+        validators=[
+            DataRequired(),
+            Length(min=2, max=200)
+        ]
+    )
+
+    colour3 = StringField('Colour 3',
+        validators=[
+            DataRequired(),
+            Length(min=2, max=20)
+        ]
+    )
+
+    submit = SubmitField('Update')
+
+###class DeletePaletteForm(FlaskForm):
+
+
+
+###class RandomForm(FlaskForm):
+
+    ###how to random??
+
+   ## #submit = SubmitField('Surprise me!')
