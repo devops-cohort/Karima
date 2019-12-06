@@ -1,8 +1,9 @@
 <html>
 {% extends "layout.html" %}
 {% block body_content %}
-    <h1>{{ Palette.palette_name }} - update </h1>
+<h1>{{ Update }} </h1>
     <p><b> Go ahead and switch it up!</b> </p>
+    <p>Please enter the new palette name and colours you would like.</p>
     <div class="form">
         <form method="POST" action=" ">
             {{ form.hidden_tag() }}

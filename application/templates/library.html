@@ -6,9 +6,10 @@
 
 	
 
-        {% for palette  in Palettes %}
+        {% for palette in Palettes %}
                 <div>
 			<h3><u>{{ palette.palette_name }}</u></h3>
+			<h2><b> Palette ID:</b> {{ palette.id }}<h2>
                         <p><b> *Colour 1:</b>{{ palette.colour1}} </p>
                         <p><b> *Colour 2:</b>{{ palette.colour2}} </p>
 			<p><b> *Colour 3:</b>{{ palette.colour3}} </p>
