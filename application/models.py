@@ -1,16 +1,18 @@
-from application import db
-  
+from application import db, login_manager
+
+from flask_login import UserMixin
+
 from datetime import datetime
+
 class Colours(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     colour_name = db.Column(db.String(200), nullable=False, unique=True)
     hex_code = db.Column(db.String(100), nullable=False, unique=True)
     hue_cat = db.Column(db.String(200), nullable=False)
-    #palettes = db.relationship('Palettes', backref= 'colours',
 
-    palettes1 = db.relationship('Palettes', backref = 'palettes1', lazy = 'dynamic', foreign_keys = 'Palettes.colour1')
-    palettes2 = db.relationship('Palettes', backref = 'palettes2', lazy = 'dynamic', foreign_keys = 'Palettes.colour2')
-    palettes3 = db.relationship('Palettes', backref = 'palettes3', lazy = 'dynamic', foreign_keys = 'Palettes.colour3')
+    palettes1 = db.relationship('Palettes', backref = 'palettes1', lazy = True, foreign_keys = 'Palettes.colour1')
+    palettes2 = db.relationship('Palettes', backref = 'palettes2', lazy = True, foreign_keys = 'Palettes.colour2')
+    palettes3 = db.relationship('Palettes', backref = 'palettes3', lazy = True, foreign_keys = 'Palettes.colour3')
 
 
     def __repr__(self):
@@ -26,6 +28,7 @@ class Palettes(db.Model):
     colour1 = db.Column(db.Integer,db.ForeignKey('colours.id'), nullable=False)
     colour2 = db.Column(db.Integer,db.ForeignKey('colours.id'), nullable=False)
     colour3 = db.Column(db.Integer,db.ForeignKey('colours.id'), nullable=False)
+
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
@@ -39,6 +42,27 @@ class Palettes(db.Model):
             'Colour 3 ID: ', str(self.colour3), '\r\n',
             'Date: ', str(self.date_created), '\r\n'
         ])
+
+
+class Users(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(500), nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
+    #Palettes = db.relationship('Palettes', backref='author',lazy=True)
+    
+    def __repr__(self):
+        return ''.join([
+            'User ID: ', str(self.id), '\r\n', 
+            'Email: ', self.email, '\r\n', 
+            'Name: ',self.first_name, '\r\n', ' ', self.last_name
+        ])
+
+@login_manager.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
+
 #class Sortment(db.Model):
  #   id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
   #  c_id = db.Column(db.Integer,db.ForeignKey('colours.id'), nullable=False)

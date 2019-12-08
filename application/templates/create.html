@@ -10,15 +10,19 @@
                         {{ form.palette_name.label }}
                         {{ form.palette_name }}
                         <br>
-                        {{ form.colour1.label }}
-                        {{ form.colour1 }}
-                        <br>
-                        {{ form.colour2.label }}
-                        {{ form.colour2 }}
-                        <br>
-                        {{ form.colour3.label }}
-                        {{ form.colour3 }}
-                        <br>
+
+			{% from "_formhelpers.html" import render_field %}
+		<form method=post>
+	<d1>
+                {{ render_field(form.select) }}
+                <p>
+                {{ render_field(form.select) }}
+                <p>
+                {{ render_field(form.select) }}
+        </d1>
+	
+		<p><input type=submit value=colour_search>
+		<br>
                         {{ form.submit }}
                 </form>
         </div>

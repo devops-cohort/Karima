@@ -1,0 +1,14 @@
+{% block body_content %}
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+	<d1>
+		{{ render_field(form.select) }}
+		<p>
+		{{ render_field(form.select) }}
+		<p>
+		{{ render_field(form.select) }}
+	</d1>
+	<p><input type=submit value=colour_search>
+</form>
+
+{% endblock body_content %}
