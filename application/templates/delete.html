@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+
+        <p>Delete a palette..</p>
+        <div class="form">
+                <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                               {{ form.palett_id.label }}
+                                {% if form.palette_id.errors %}
+                                        {{ form.palette_id }}
+                                        <div class="error">
+                                                {% for error in form.palette_id.errors %}
+                                                        <span>{{ error }}</span>
+                                                {% endfor %}
+                                        </div>
+                                {% else %}
+                                        {{ form.palette_id }}
+                                {% endif %}
+                        </div>
+			<br>
+			<div class="form-group">
+
+				{{ form.submit }}
+
+			</div>
+		</form>
+        </div>
+
+{% endblock body_content %}
