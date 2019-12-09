@@ -4,7 +4,7 @@ from application import app, db, bcrypt
 
 from flask import render_template, redirect, url_for, request, flash
 from application.models import Colours, Palettes, Users
-from application.forms import UpdatePaletteForm, RegistrationForm, LoginForm, UpdateAccountForm, ColourSearchForm, DeletePaletteForm
+from application.forms import UpdatePaletteForm, RegistrationForm, LoginForm, UpdateAccountForm, ColourSearchForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/home')
@@ -16,42 +16,59 @@ def home():
 def library():
         paletteData = Palettes.query.all()
 
-        return render_template('library.html', title='Library', palettes=paletteData)
+        return render_template('library.html', title='Library', Palettes=paletteData)
+
+@app.route('/library/delete/<int:id>', methods=['GET','POST'])
+def delete_palette(id):
+
+    palette_delete = Palettes.query.filter_by(id=id).first()
+
+    db.session.delete(palette_delete)
+    db.session.commit()
+
+    return redirect(url_for('library'))
+
 
 
 @app.route('/update', methods=['GET','POST'])
 def update():
 
-    palette= Palettes.query.filter_by(id=form.paletteid.data)()
-
     form = ColourSearchForm()
     colour_search = ColourSearchForm(request.form)
 
     if request.method == 'POST':
-        search = colour_search.data['select']
+        palettes = Palettes(colour1=form.select1.data, colour2=form.select2.data, colour3=form.select3.data, user_id=current_user.get_id())
+        #print(form.select1.data)
+        #print(form.select2.data)
+        #print(form.select3.data)
 
-        db.session.add(Palettes)
+
+        db.session.add(palettes)
         db.session.commit()
-
-        return render_template('library.html',form=colour_search)
-
-    else:
-        print(form.errors)
-    return render_template('update.html', title='Palette', form=form)
-
-
-
-@app.route('/delete', methods = ['GET', 'POST'])
-def delete():
-    form = DeletePaletteForm()
-
-    if form.validate_on_submit():
-
-        Palettes.query.filter_by(palette=form.id.data).delete()
 
         return redirect(url_for('library'))
 
-    return render_template('library.html',palette= 'Delete a palette', form=form)
+    else:
+        print(form.errors)
+    return render_template('create.html', title='Palette', form=form)
+
+#    palette= Palettes.query.filter_by(id=form.paletteid.data)()
+
+ #   form = ColourSearchForm()
+  #  colour_search = ColourSearchForm(request.form)
+
+   # if request.method == 'POST':
+    #    search = colour_search.data['select']
+
+     #   db.session.add(Palettes)
+      #  db.session.commit()
+
+       # return render_template('library.html',form=colour_search)
+
+  #  else:
+   #     print(form.errors)
+   # return render_template('update.html', title='Palette', form=form)
+
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -121,14 +138,16 @@ def create():
     colour_search = ColourSearchForm(request.form)
 
     if request.method == 'POST':
-        search = colour_search.data['select']
+        palettes = Palettes(colour1=form.select1.data, colour2=form.select2.data, colour3=form.select3.data, user_id=current_user.get_id())
+        #print(form.select1.data)
+        #print(form.select2.data)
+        #print(form.select3.data)
 
 
-
-        #db.session.add(Palettes)
+        db.session.add(palettes)
         db.session.commit()
 
-        return render_template('library.html',form=colour_search)
+        return redirect(url_for('library'))
 
     else:
         print(form.errors)

@@ -12,14 +12,14 @@
 			{% from "_formhelpers.html" import render_field %}
 		<form method=post>
 	<d1>
-                {{ render_field(form.select) }}
+                {{ render_field(form.select1) }}
                 <p>
-                {{ render_field(form.select) }}
+                {{ render_field(form.select2) }}
                 <p>
-                {{ render_field(form.select) }}
+                {{ render_field(form.select3) }}
         </d1>
 	
-		<p><input type=submit value=colour_search>
+		<p>
 		<br>
                         {{ form.submit }}
                 </form>

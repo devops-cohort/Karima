@@ -9,11 +9,13 @@
         {% for palette in Palettes %}
                 <div>
 			<h3><u>{{ palette.palette_name }}</u></h3>
-			<h2><b> Palette ID:</b> {{ palette.id }}<h2>
-                        <p><b> *Colour 1:</b>{{ palette.colour1}} </p>
-                        <p><b> *Colour 2:</b>{{ palette.colour2}} </p>
-			<p><b> *Colour 3:</b>{{ palette.colour3}} </p>
+			<h2> Palette ID: {{ palette.id }}<h2>
+                        <p> *Colour 1:{{ palette.colour1}} </p>
+			<p> *Colour 2:{{ palette.colour2}} </p>
+			<p> *Colour 3:{{ palette.colour3}} </p>
                         <p>  {{ palette.date_created }}</p>
+
+			<a href="/library/delete/{{ palette.id }}" >Delete</a>
                 </div>
         {% endfor %}
 {% endblock body_content %}

@@ -16,70 +16,52 @@ class ColourSearchForm(FlaskForm):
        #colours.append(colour.colour_name)
        temp = colour.colour_name, colour.colour_name
        colours.append(temp)
-    select = SelectField('Colour pick',choices=colours)
-    search = StringField('')
+    select1 = SelectField('Colour pick',choices=colours)
+    select2 = SelectField('Colour pick',choices=colours)
+    select3 = SelectField('Colour pick',choices=colours)
 
     submit = SubmitField ('Make my palette!')
 
-#class PaletteForm(FlaskForm):
-
-    #palette_name = StringField('Palette Name',
-        #validators=[
-            #DataRequired(),
-            #Length(min=1, max=150)
-        #]
-    #)
-
-    #colour1 = StringField('Colour 1',
-        #validators=[
-            #DataRequired(),
-            #Length(min=1, max=50)
-        #]
-    #)
-
-    #colour2 = StringField('Colour 2',
-        #validators=[
-            #DataRequired(),
-            #Length(min=1, max=50)
-        #]
-    #)
-
-    #colour3 = StringField('Colour 3',
-        #validators=[
-            #DataRequired(),
-            #Length(min=1, max=50)
-        #]
-    #)
-
-    #submit = SubmitField('Make my palette!')
 
 class UpdatePaletteForm(FlaskForm):
 
     colours = []
-    for colour in Colours.query.all():
-
+    query = Colours.query.all()
+    for colour in query:
+       #colours.append(colour.colour_name)
        temp = colour.colour_name, colour.colour_name
        colours.append(temp)
-    select = SelectField('Colour Search',choices=colours)
-    search = StringField('')
+    select1 = SelectField('Colour pick',choices=colours)
+    select2 = SelectField('Colour pick',choices=colours)
+    select3 = SelectField('Colour pick',choices=colours)
 
-    submit = SubmitField('Update')
+    submit = SubmitField ('Update my palette!')
 
-class DeletePaletteForm(FlaskForm):
+   # colours = []
+  #  for colour in Colours.query.all():
 
-    palette = StringField('Palette ID: ',
-            validators=[
-                DataRequired(),
-                Length(min=2, max=30)
-        ]
-    )
+     #  temp = colour.colour_name, colour.colour_name
+    #   colours.append(temp)
+   # select = SelectField('Colour Search',choices=colours)
+  #  search = StringField('')
+
+ #   submit = SubmitField('Update')
+
+#class DeletePaletteForm(FlaskForm):
+
+ #   palette = StringField('Palette ID: ',
+  #          validators=[
+   #             DataRequired(),
+#                Length(min=2, max=30)
+ #       ]
+  #  )
     
-    submit = SubmitField('Delete palette')
+   # submit = SubmitField('Delete palette')
 
-    def validate_palette_id(self, id):
-        exist = Palettes.query.filter_by(p_id = id).first()
-        if exist == False:
-            raise ValidationError('Palette not found')
+    #def validate_palette_id(self, id):
+     #   exist = Palettes.query.filter_by(p_id = id).first()
+      #  if exist == False:
+       #     raise ValidationError('Palette not found')
 
 
 
@@ -150,11 +132,3 @@ class UpdateAccountForm(FlaskForm):
 
     submit = SubmitField('Update')
 
-#class ColourSearchForm(FlaskForm):
- #   colours = []
-  #  for colour in Colours.query.all():
-   #    #colours.append(colour.colour_name)
-    #   temp = colour.colour_name, colour.colour_name
-     #  colours.append(temp)
-    #select = SelectField('Colour Search',choices=colours)
-   # search = StringField('')
