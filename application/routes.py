@@ -13,12 +13,16 @@ def home():
     return render_template('home.html', title='Home')
 
 @app.route('/library', methods=['GET','POST'])
+@login_required
+
 def library():
         paletteData = Palettes.query.all()
 
         return render_template('library.html', title='Library', Palettes=paletteData)
 
 @app.route('/library/delete/<int:id>', methods=['GET','POST'])
+@login_required
+
 def delete_palette(id):
 
     palette_delete = Palettes.query.filter_by(id=id).first()
@@ -31,6 +35,8 @@ def delete_palette(id):
 
 
 @app.route('/update', methods=['GET','POST'])
+@login_required
+
 def update():
 
     form = ColourSearchForm()
@@ -98,15 +104,6 @@ def login():
 
 
 
-#@app.route('/test',methods=['GET','POST'])
-#def test():
-   # colour_search = ColourSearchForm(request.form)
-    #print(colour_search)
-    #if request.method == 'POST':
-       # search = colour_search.data['select']
-    #return render_template('test.html',form=colour_search)
-
-
 @app.route('/register', methods=['GET','POST'])
 def register():
 
@@ -133,6 +130,8 @@ def register():
 
 
 @app.route('/create', methods=['GET','POST'])
+@login_required
+
 def create():
     form = ColourSearchForm()
     colour_search = ColourSearchForm(request.form)
